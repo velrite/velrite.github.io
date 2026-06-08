@@ -3,20 +3,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Olamide Olalekan — Platform Engineer</title>
+  <title>Olamide Olalekan — Platform & DevSecOps Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #0a0a0f;
-      --surface: #111118;
-      --surface2: #16161f;
-      --border: #1e1e2e;
+      --bg: #080810;
+      --surface: #0e0e1a;
+      --surface2: #13131f;
+      --border: #1c1c2e;
+      --border-bright: #2a2a45;
       --accent: #4f8ef7;
-      --accent2: #7c3aed;
-      --text: #e2e8f0;
-      --muted: #64748b;
-      --bright: #f8fafc;
+      --accent-dim: rgba(79,142,247,0.12);
+      --accent-glow: rgba(79,142,247,0.25);
+      --green: #34d399;
+      --green-dim: rgba(52,211,153,0.1);
+      --text: #c8d0e0;
+      --muted: #55607a;
+      --bright: #f0f4ff;
     }
 
     html { scroll-behavior: smooth; }
@@ -24,10 +30,22 @@
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      font-family: 'DM Sans', sans-serif;
       font-size: 16px;
       line-height: 1.7;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ── GRAIN OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.4;
     }
 
     /* ── NAV ── */
@@ -38,31 +56,30 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1.2rem 6vw;
-      background: rgba(10,10,15,0.85);
-      backdrop-filter: blur(12px);
+      padding: 1.1rem 6vw;
+      background: rgba(8,8,16,0.82);
+      backdrop-filter: blur(18px);
       border-bottom: 1px solid var(--border);
     }
     .nav-logo {
+      font-family: 'Syne', sans-serif;
       font-size: 1rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
+      font-weight: 800;
+      letter-spacing: 0.12em;
       color: var(--accent);
       text-transform: uppercase;
     }
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links { display: flex; gap: 2.2rem; list-style: none; }
     .nav-links a {
       color: var(--muted);
       text-decoration: none;
-      font-size: 0.85rem;
-      letter-spacing: 0.06em;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       transition: color 0.2s;
     }
     .nav-links a:hover { color: var(--bright); }
-
-    /* ── SECTIONS ── */
-    section { padding: 6rem 6vw; max-width: 1100px; margin: 0 auto; }
 
     /* ── HERO ── */
     #hero {
@@ -70,547 +87,969 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding-top: 8rem;
-      max-width: 100%;
-      padding-left: 6vw;
-      padding-right: 6vw;
+      padding: 10rem 6vw 6rem;
       position: relative;
       overflow: hidden;
     }
-    #hero::before {
-      content: '';
+    .hero-bg-grid {
       position: absolute;
-      top: -200px; right: -200px;
-      width: 600px; height: 600px;
-      background: radial-gradient(circle, rgba(79,142,247,0.07) 0%, transparent 70%);
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(79,142,247,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(79,142,247,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
       pointer-events: none;
     }
-    #hero::after {
-      content: '';
+    .hero-glow-1 {
       position: absolute;
-      bottom: -100px; left: -100px;
-      width: 400px; height: 400px;
-      background: radial-gradient(circle, rgba(124,58,237,0.06) 0%, transparent 70%);
+      top: -20%; right: -10%;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(79,142,247,0.08) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-glow-2 {
+      position: absolute;
+      bottom: -10%; left: -5%;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(52,211,153,0.05) 0%, transparent 65%);
       pointer-events: none;
     }
     .hero-inner { max-width: 1100px; margin: 0 auto; width: 100%; position: relative; z-index: 1; }
+
     .hero-eyebrow {
-      font-size: 0.78rem;
-      letter-spacing: 0.2em;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 1.2rem;
+      margin-bottom: 1.4rem;
       display: flex;
       align-items: center;
-      gap: 0.75rem;
+      gap: 0.8rem;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.1s forwards;
     }
     .hero-eyebrow::before {
       content: '';
       display: inline-block;
-      width: 32px; height: 1px;
+      width: 36px; height: 1px;
       background: var(--accent);
     }
+
     h1 {
-      font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.8rem, 6vw, 5rem);
       font-weight: 800;
-      line-height: 1.1;
+      line-height: 1.0;
       color: var(--bright);
-      letter-spacing: -0.02em;
-      margin-bottom: 0.3rem;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.4rem;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.2s forwards;
     }
-    .hero-title-accent { color: var(--accent); }
+    .hero-name-dim { color: var(--muted); }
+
     .hero-role {
-      font-size: clamp(1rem, 2vw, 1.3rem);
-      color: var(--muted);
+      font-family: 'DM Mono', monospace;
+      font-size: clamp(0.85rem, 1.5vw, 1rem);
+      color: var(--accent);
       font-weight: 400;
-      margin-bottom: 1.6rem;
-      letter-spacing: 0.02em;
+      margin-bottom: 2rem;
+      letter-spacing: 0.05em;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.3s forwards;
     }
-    .hero-statement {
-      font-size: clamp(1rem, 1.8vw, 1.2rem);
-      color: var(--text);
-      max-width: 580px;
+
+    .hero-philosophy {
+      max-width: 560px;
+      margin-bottom: 1rem;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.4s forwards;
+    }
+    .hero-philosophy p {
+      font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+      color: var(--bright);
+      line-height: 1.6;
+      font-weight: 300;
+    }
+    .hero-philosophy p strong {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .hero-subline {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
       margin-bottom: 2.8rem;
-      line-height: 1.8;
-      border-left: 2px solid var(--accent);
-      padding-left: 1.2rem;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.5s forwards;
     }
-    .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .hero-subline span { color: var(--border-bright); margin: 0 0.5rem; }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.6s forwards;
+    }
+
     .btn-primary {
       background: var(--accent);
       color: #fff;
-      padding: 0.8rem 1.8rem;
-      border-radius: 4px;
+      padding: 0.85rem 2rem;
+      border-radius: 3px;
       text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      transition: background 0.2s, transform 0.15s;
-      border: none; cursor: pointer;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      border: none;
+      cursor: pointer;
     }
-    .btn-primary:hover { background: #3a7de8; transform: translateY(-1px); }
+    .btn-primary:hover {
+      background: #3a7de8;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(79,142,247,0.3);
+    }
     .btn-secondary {
       background: transparent;
       color: var(--text);
-      padding: 0.8rem 1.8rem;
-      border-radius: 4px;
+      padding: 0.85rem 2rem;
+      border-radius: 3px;
       text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      border: 1px solid var(--border);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid var(--border-bright);
       transition: border-color 0.2s, color 0.2s, transform 0.15s;
       cursor: pointer;
     }
-    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
 
-    /* ── SECTION HEADER ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── SECTION COMMON ── */
+    .section-wrap { padding: 6rem 6vw; max-width: 1100px; margin: 0 auto; }
+    .full-bleed { padding: 6rem 6vw; background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .full-bleed-inner { max-width: 1100px; margin: 0 auto; }
+
     .section-label {
-      font-size: 0.72rem;
-      letter-spacing: 0.22em;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.25em;
       text-transform: uppercase;
       color: var(--accent);
       margin-bottom: 0.6rem;
       display: flex;
       align-items: center;
-      gap: 0.6rem;
+      gap: 0.7rem;
     }
     .section-label::before {
       content: '';
       display: inline-block;
-      width: 24px; height: 1px;
+      width: 22px; height: 1px;
       background: var(--accent);
     }
+
     h2 {
-      font-size: clamp(1.6rem, 3vw, 2.2rem);
-      font-weight: 700;
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.7rem, 3.2vw, 2.4rem);
+      font-weight: 800;
       color: var(--bright);
-      letter-spacing: -0.01em;
+      letter-spacing: -0.02em;
       margin-bottom: 3rem;
+      line-height: 1.15;
     }
+
+    /* ── DIVIDER ── */
+    .divider { border: none; border-top: 1px solid var(--border); }
 
     /* ── ABOUT ── */
     #about { border-top: 1px solid var(--border); }
     .about-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 5rem;
       align-items: start;
     }
     .about-text p {
       color: var(--text);
-      margin-bottom: 1.4rem;
-      font-size: 0.98rem;
-      line-height: 1.85;
+      margin-bottom: 1.2rem;
+      font-size: 0.97rem;
+      line-height: 1.9;
     }
     .about-text p:last-child { margin-bottom: 0; }
-    .about-stack h3 {
-      font-size: 0.78rem;
-      letter-spacing: 0.15em;
+    .about-highlight {
+      border-left: 2px solid var(--accent);
+      padding-left: 1.2rem;
+      margin: 1.6rem 0;
+      font-size: 1rem !important;
+      color: var(--bright) !important;
+      font-style: italic;
+    }
+
+    .about-sidebar h3 {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--muted);
       margin-bottom: 1rem;
+      margin-top: 2rem;
     }
+    .about-sidebar h3:first-child { margin-top: 0; }
     .stack-list {
       list-style: none;
       display: flex;
       flex-wrap: wrap;
-      gap: 0.6rem;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
     }
     .stack-list li {
       background: var(--surface2);
       border: 1px solid var(--border);
       color: var(--text);
-      padding: 0.35rem 0.85rem;
-      border-radius: 3px;
-      font-size: 0.8rem;
+      padding: 0.3rem 0.75rem;
+      border-radius: 2px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
       letter-spacing: 0.04em;
+      transition: border-color 0.2s, color 0.2s;
     }
+    .stack-list li:hover { border-color: var(--accent); color: var(--accent); }
 
-    /* ── WHAT I DO ── */
-    #services { border-top: 1px solid var(--border); background: var(--surface); padding-top: 6rem; padding-bottom: 6rem; max-width: 100%; }
-    .services-inner { max-width: 1100px; margin: 0 auto; padding: 0 6vw; }
+    /* ── SERVICES ── */
     .services-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 1.5rem;
+      gap: 1px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
     }
     .service-card {
       background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 2rem 1.8rem;
-      transition: border-color 0.25s, transform 0.2s;
+      padding: 2.2rem 2rem;
+      transition: background 0.25s;
+      position: relative;
     }
-    .service-card:hover { border-color: var(--accent); transform: translateY(-3px); }
-    .service-icon {
-      width: 40px; height: 40px;
-      background: rgba(79,142,247,0.1);
-      border-radius: 6px;
-      display: flex; align-items: center; justify-content: center;
+    .service-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 2rem; right: 2rem;
+      height: 2px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+      transform-origin: left;
+    }
+    .service-card:hover { background: #16162a; }
+    .service-card:hover::after { transform: scaleX(1); }
+
+    .service-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--accent);
+      letter-spacing: 0.15em;
       margin-bottom: 1.2rem;
-      font-size: 1.2rem;
+      opacity: 0.6;
     }
     .service-card h3 {
-      font-size: 1rem;
+      font-family: 'Syne', sans-serif;
+      font-size: 1.05rem;
       font-weight: 700;
       color: var(--bright);
-      margin-bottom: 0.7rem;
+      margin-bottom: 0.8rem;
+      line-height: 1.3;
     }
-    .service-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
+    .service-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.75; }
 
     /* ── PROJECTS ── */
     #projects { border-top: 1px solid var(--border); }
     .projects-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
       gap: 1.5rem;
     }
     .project-card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 2rem;
+      border-radius: 4px;
       display: flex;
       flex-direction: column;
+      overflow: hidden;
       transition: border-color 0.25s, transform 0.2s;
-    }
-    .project-card:hover { border-color: var(--accent); transform: translateY(-3px); }
-    .project-card-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 1rem;
-    }
-    .project-folder { font-size: 1.5rem; }
-    .project-link {
-      color: var(--muted);
       text-decoration: none;
-      font-size: 0.85rem;
-      transition: color 0.2s;
-      display: flex; align-items: center; gap: 0.3rem;
+      color: inherit;
     }
-    .project-link:hover { color: var(--accent); }
+    .project-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.4);
+    }
+    .project-diagram {
+      width: 100%;
+      background: var(--surface2);
+      border-bottom: 1px solid var(--border);
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 160px;
+    }
+    .project-body { padding: 1.8rem; flex: 1; display: flex; flex-direction: column; }
+    .project-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+    }
     .project-card h3 {
+      font-family: 'Syne', sans-serif;
       font-size: 1.05rem;
       font-weight: 700;
       color: var(--bright);
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.5rem;
     }
-    .project-desc {
-      font-size: 0.88rem;
+    .project-problem {
+      font-size: 0.83rem;
       color: var(--muted);
       line-height: 1.7;
+      margin-bottom: 0.8rem;
+    }
+    .project-result {
+      font-size: 0.83rem;
+      color: var(--text);
+      line-height: 1.7;
+      margin-bottom: 1.2rem;
       flex: 1;
-      margin-bottom: 1.4rem;
     }
     .project-proof {
-      background: rgba(79,142,247,0.07);
-      border: 1px solid rgba(79,142,247,0.18);
-      border-radius: 4px;
-      padding: 0.7rem 1rem;
-      font-size: 0.82rem;
+      background: var(--accent-dim);
+      border: 1px solid rgba(79,142,247,0.2);
+      border-radius: 3px;
+      padding: 0.65rem 1rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
       color: var(--accent);
       line-height: 1.6;
+      margin-bottom: 1.2rem;
     }
+    .project-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      margin-top: auto;
+    }
+    .project-github {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .project-card:hover .project-github { color: var(--accent); }
+    .project-arrow {
+      font-size: 1rem;
+      color: var(--muted);
+      transition: transform 0.2s, color 0.2s;
+    }
+    .project-card:hover .project-arrow { transform: translate(3px, -3px); color: var(--accent); }
 
     /* ── PROOF ── */
-    #proof { border-top: 1px solid var(--border); background: var(--surface); max-width: 100%; padding: 6rem 6vw; }
-    .proof-inner { max-width: 1100px; margin: 0 auto; }
     .proof-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
     }
     .proof-card {
       background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 6px;
       padding: 2rem 1.5rem;
       text-align: center;
-      transition: border-color 0.25s;
+      transition: background 0.2s;
     }
-    .proof-card:hover { border-color: var(--accent); }
+    .proof-card:hover { background: #16162a; }
     .proof-number {
-      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
       font-weight: 800;
       color: var(--accent);
-      letter-spacing: -0.02em;
+      letter-spacing: -0.03em;
       line-height: 1;
       margin-bottom: 0.5rem;
     }
     .proof-label {
-      font-size: 0.8rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
       color: var(--muted);
       line-height: 1.5;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
+    }
+    .proof-context {
+      font-size: 0.75rem;
+      color: var(--border-bright);
+      margin-top: 0.3rem;
+      line-height: 1.4;
     }
 
     /* ── CONTACT ── */
     #contact { border-top: 1px solid var(--border); }
-    .contact-inner { max-width: 620px; }
-    .contact-inner p {
-      color: var(--muted);
-      margin-bottom: 2.5rem;
-      font-size: 1rem;
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
     }
-    .contact-links { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2.5rem; }
-    .contact-link {
+    .contact-left h2 { margin-bottom: 1rem; }
+    .contact-left p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+      line-height: 1.8;
+    }
+    .services-offered {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+    }
+    .service-pill {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 0.7rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
       color: var(--text);
-      text-decoration: none;
-      font-size: 0.95rem;
-      padding: 1rem 1.2rem;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 5px;
-      transition: border-color 0.2s, color 0.2s;
+      letter-spacing: 0.04em;
     }
-    .contact-link:hover { border-color: var(--accent); color: var(--accent); }
-    .contact-link span:first-child { font-size: 1.1rem; }
+    .service-pill::before {
+      content: '';
+      width: 5px; height: 5px;
+      background: var(--accent);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
     .availability {
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
-      font-size: 0.82rem;
-      color: #34d399;
-      background: rgba(52,211,153,0.08);
+      gap: 0.6rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--green);
+      background: var(--green-dim);
       border: 1px solid rgba(52,211,153,0.2);
       border-radius: 20px;
-      padding: 0.4rem 1rem;
+      padding: 0.45rem 1.1rem;
+      letter-spacing: 0.06em;
     }
     .availability::before {
       content: '';
-      width: 7px; height: 7px;
-      background: #34d399;
+      width: 6px; height: 6px;
+      background: var(--green);
       border-radius: 50%;
-      display: inline-block;
+      flex-shrink: 0;
       animation: pulse 2s infinite;
     }
     @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
+      0%,100%{ opacity:1; box-shadow: 0 0 0 0 rgba(52,211,153,0.4); }
+      50%{ opacity:0.6; box-shadow: 0 0 0 4px rgba(52,211,153,0); }
+    }
+
+    .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+    .contact-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 1.5rem;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s, transform 0.15s;
+      cursor: pointer;
+    }
+    .contact-link:hover {
+      border-color: var(--accent);
+      background: var(--surface);
+      transform: translateX(4px);
+    }
+    .contact-link-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .contact-link-icon {
+      width: 36px; height: 36px;
+      background: var(--accent-dim);
+      border-radius: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .contact-link-text strong {
+      display: block;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.2rem;
+    }
+    .contact-link-text span {
+      font-size: 0.88rem;
+      color: var(--text);
+    }
+    .contact-link:hover .contact-link-text span { color: var(--accent); }
+    .contact-link-arrow {
+      color: var(--muted);
+      font-size: 0.9rem;
+      transition: transform 0.2s, color 0.2s;
+    }
+    .contact-link:hover .contact-link-arrow {
+      transform: translateX(3px);
+      color: var(--accent);
     }
 
     /* ── FOOTER ── */
     footer {
       border-top: 1px solid var(--border);
       padding: 2rem 6vw;
-      text-align: center;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       color: var(--muted);
-      font-size: 0.8rem;
-      letter-spacing: 0.04em;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
     }
 
+    /* ── SVG DIAGRAMS ── */
+    .diagram-svg { width: 100%; height: auto; max-width: 340px; }
+    .diag-node {
+      fill: var(--surface);
+      stroke: var(--border-bright);
+      stroke-width: 1;
+      rx: 4;
+    }
+    .diag-node-accent {
+      fill: rgba(79,142,247,0.1);
+      stroke: var(--accent);
+      stroke-width: 1;
+    }
+    .diag-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      fill: #8899bb;
+      text-anchor: middle;
+    }
+    .diag-label-bright {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      fill: #c8d0e0;
+      text-anchor: middle;
+    }
+    .diag-line { stroke: var(--border-bright); stroke-width: 1; fill: none; stroke-dasharray: 3,3; }
+    .diag-line-accent { stroke: var(--accent); stroke-width: 1.5; fill: none; }
+    .diag-arrow { fill: var(--accent); }
+
     /* ── RESPONSIVE ── */
-    @media (max-width: 700px) {
-      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    @media (max-width: 768px) {
+      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
       .nav-links { display: none; }
       .hero-buttons { flex-direction: column; }
-      .btn-primary, .btn-secondary { text-align: center; }
+      footer { flex-direction: column; gap: 0.5rem; }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav>
-    <div class="nav-logo">OO</div>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#proof">Proof</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">OO</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#proof">Proof</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
 
-  <!-- HERO -->
-  <div id="hero">
-    <div class="hero-inner">
-      <div class="hero-eyebrow">Platform Engineer</div>
-      <h1>Olamide<br><span class="hero-title-accent">Olalekan</span></h1>
-      <div class="hero-role">Senior Platform Engineer</div>
-      <p class="hero-statement">
-        I design and operate cloud infrastructure that holds under failure.
-      </p>
-      <div class="hero-buttons">
-        <a href="#projects" class="btn-primary">View My Work</a>
-        <a href="mailto:velrite.tech@gmail.com" class="btn-secondary">Get In Touch</a>
-      </div>
+<!-- HERO -->
+<div id="hero">
+  <div class="hero-bg-grid"></div>
+  <div class="hero-glow-1"></div>
+  <div class="hero-glow-2"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Platform & DevSecOps Engineer</div>
+    <h1>Olamide<br><span class="hero-name-dim">Olalekan</span></h1>
+    <div class="hero-role">// velrite.github.io</div>
+    <div class="hero-philosophy">
+      <p>I build platforms that <strong>hold under failure</strong> —<br>and recover when they don't.</p>
+    </div>
+    <div class="hero-subline">
+      Kubernetes <span>·</span> Terraform <span>·</span> Reliability Engineering <span>·</span> Cloud Cost Visibility
+    </div>
+    <div class="hero-buttons">
+      <a href="#projects" class="btn-primary">View My Work</a>
+      <a href="mailto:velrite.tech@gmail.com" class="btn-secondary">Get In Touch</a>
     </div>
   </div>
+</div>
 
-  <!-- ABOUT -->
-  <section id="about">
+<!-- ABOUT -->
+<div id="about">
+  <div class="section-wrap">
     <div class="section-label">About</div>
-    <h2>Engineer by training.<br>Infrastructure by obsession.</h2>
+    <h2>Engineer by training.<br>Systems thinker by instinct.</h2>
     <div class="about-grid">
       <div class="about-text">
-        <p>
-          My foundation is Mechatronics — a discipline that forces you to think in systems. Mechanical, electrical, software — all interacting, all failing in different ways. That training shaped how I approach infrastructure: not as a collection of tools, but as a system with failure modes to anticipate and contain.
-        </p>
-        <p>
-          I moved into cloud infrastructure because that is where systems thinking has the most leverage. I design platforms where failure is expected, isolated, and recovered from automatically — not platforms that pretend failure won't happen.
-        </p>
-        <p>
-          Today I work at the intersection of reliability engineering, platform automation, and cloud cost visibility. My goal is the same every time — build platforms that are boring to operate because they handle the hard parts themselves.
-        </p>
+        <p>My foundation is Mechatronics — a discipline that forces you to hold mechanical, electrical, and software systems in your head at once. That training shaped how I approach infrastructure: not as a collection of tools, but as a system with failure modes to anticipate and contain.</p>
+        <p class="about-highlight">"Failure is inevitable. The goal is to make recovery predictable."</p>
+        <p>Today I work at the intersection of reliability engineering, platform automation, and cloud cost visibility — building platforms that are boring to operate because they handle the hard parts themselves. My work spans 80+ projects on GitHub, instructor experience training engineers, and a track record of platforms that prove their resilience with real numbers.</p>
       </div>
-      <div class="about-stack">
+      <div class="about-sidebar">
         <h3>Core Stack</h3>
         <ul class="stack-list">
-          <li>Kubernetes</li>
-          <li>Terraform</li>
-          <li>Docker</li>
-          <li>Prometheus</li>
-          <li>GitHub Actions</li>
-          <li>AWS</li>
-          <li>Helm</li>
-          <li>Go</li>
-          <li>Python</li>
-          <li>Zero-Trust Networking</li>
+          <li>Kubernetes</li><li>Terraform</li><li>Docker</li>
+          <li>Prometheus</li><li>GitHub Actions</li><li>AWS</li>
+          <li>Helm</li><li>Vault</li><li>OpenCost</li>
+          <li>Go</li><li>Python</li>
+        </ul>
+        <h3>Disciplines</h3>
+        <ul class="stack-list">
+          <li>Reliability Engineering</li>
+          <li>Zero-Trust Security</li>
           <li>FinOps</li>
+          <li>DevSecOps</li>
           <li>IaC</li>
+        </ul>
+        <h3>Background</h3>
+        <ul class="stack-list">
+          <li>Mechatronics</li>
+          <li>80+ GitHub Projects</li>
+          <li>Lead Instructor</li>
         </ul>
       </div>
     </div>
-  </section>
+  </div>
+</div>
 
-  <!-- WHAT I DO -->
-  <div id="services">
-    <div class="services-inner">
-      <div class="section-label">What I Do</div>
-      <h2>Four disciplines.<br>One operating standard.</h2>
-      <div class="services-grid">
-        <div class="service-card">
-          <div class="service-icon">⚙️</div>
-          <h3>Reliability Engineering</h3>
-          <p>Auto-healing platforms with sub-60-second recovery. I design for failure as a first-class concern — not an afterthought.</p>
-        </div>
-        <div class="service-card">
-          <div class="service-icon">💰</div>
-          <h3>FinOps & Cost Visibility</h3>
-          <p>Full cost attribution and visibility across cloud spend. No surprise bills. Every dollar traced to a service, team, or workload.</p>
-        </div>
-        <div class="service-card">
-          <div class="service-icon">🔒</div>
-          <h3>Zero-Trust Security</h3>
-          <p>Network segmentation, non-root containers, policy enforcement at every layer. Zero blast radius is the target, not the exception.</p>
-        </div>
-        <div class="service-card">
-          <div class="service-icon">📦</div>
-          <h3>Infrastructure as Code</h3>
-          <p>Entire environments provisioned declaratively. Reproducible from a single command. No manual configuration. No drift.</p>
-        </div>
+<!-- SERVICES -->
+<div id="services" class="full-bleed">
+  <div class="full-bleed-inner">
+    <div class="section-label">What I Do</div>
+    <h2>Four disciplines.<br>One operating standard.</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-num">01</div>
+        <h3>Reliability Engineering</h3>
+        <p>Simulated node failures recovered in 20–46 seconds automatically. Platforms designed so failure is expected, isolated, and recovered from — without human intervention.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-num">02</div>
+        <h3>FinOps & Cost Visibility</h3>
+        <p>Full cost attribution per service from day one. No surprise cloud bills. Every dollar traced to a workload — with visibility built into the platform, not bolted on later.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-num">03</div>
+        <h3>Zero-Trust Security</h3>
+        <p>Network segmentation, non-root containers, no static credentials, policy enforcement at every layer. Zero blast radius is the design target — not the exception.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-num">04</div>
+        <h3>Infrastructure as Code</h3>
+        <p>Entire environments provisioned declaratively. Reproducible from a single command. The state file owns the truth. No manual configuration. No drift. No surprises.</p>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- PROJECTS -->
-  <section id="projects">
+<!-- PROJECTS -->
+<div id="projects">
+  <div class="section-wrap">
     <div class="section-label">Projects</div>
-    <h2>Built in public.<br>Numbers don't lie.</h2>
+    <h2>Built in public.<br>Numbers behind every claim.</h2>
     <div class="projects-grid">
 
-      <div class="project-card">
-        <div class="project-card-top">
-          <div class="project-folder">📁</div>
-          <a href="https://github.com/velrite/auto-healing-kubernetes-platform" target="_blank" class="project-link">GitHub ↗</a>
+      <!-- PROJECT 1 -->
+      <a class="project-card" href="https://github.com/velrite/auto-healing-kubernetes-platform" target="_blank">
+        <div class="project-diagram">
+          <svg class="diagram-svg" viewBox="0 0 320 150" xmlns="http://www.w3.org/2000/svg">
+            <!-- Control Plane -->
+            <rect x="110" y="8" width="100" height="28" rx="3" fill="rgba(79,142,247,0.12)" stroke="#4f8ef7" stroke-width="1"/>
+            <text x="160" y="26" class="diag-label-bright">Control Plane</text>
+            <!-- Arrow down -->
+            <line x1="160" y1="36" x2="160" y2="52" stroke="#4f8ef7" stroke-width="1.5"/>
+            <polygon points="156,50 164,50 160,56" fill="#4f8ef7"/>
+            <!-- Nodes row -->
+            <rect x="20" y="58" width="72" height="28" rx="3" fill="#13131f" stroke="#2a2a45" stroke-width="1"/>
+            <text x="56" y="76" class="diag-label">Node 1 ✓</text>
+            <rect x="124" y="58" width="72" height="28" rx="3" fill="rgba(239,68,68,0.12)" stroke="#ef4444" stroke-width="1"/>
+            <text x="160" y="72" class="diag-label" fill="#ef4444">Node 2</text>
+            <text x="160" y="82" class="diag-label" fill="#ef4444">FAILED</text>
+            <rect x="228" y="58" width="72" height="28" rx="3" fill="#13131f" stroke="#2a2a45" stroke-width="1"/>
+            <text x="264" y="76" class="diag-label">Node 3 ✓</text>
+            <!-- Recovery arrow -->
+            <path d="M160 86 Q160 108 264 108 Q280 108 280 116" stroke="#34d399" stroke-width="1.5" fill="none" stroke-dasharray="4,2"/>
+            <polygon points="276,114 284,114 280,120" fill="#34d399"/>
+            <!-- Recovery label -->
+            <text x="220" y="106" class="diag-label" fill="#34d399">auto-recover</text>
+            <!-- Timer -->
+            <rect x="200" y="120" width="100" height="22" rx="3" fill="rgba(52,211,153,0.08)" stroke="rgba(52,211,153,0.3)" stroke-width="1"/>
+            <text x="250" y="135" class="diag-label" fill="#34d399">20–46s recovery</text>
+          </svg>
         </div>
-        <h3>Auto-Healing Kubernetes Platform</h3>
-        <p class="project-desc">Production-grade Kubernetes platform designed around failure as a first-class concern — not an afterthought.</p>
-        <div class="project-proof">⚡ Node recovery: 20–46s &nbsp;·&nbsp; Rollback: 32s &nbsp;·&nbsp; Zero blast radius</div>
-      </div>
+        <div class="project-body">
+          <div class="project-tag">Reliability Engineering</div>
+          <h3>Auto-Healing Kubernetes Platform</h3>
+          <p class="project-problem">Problem: Most Kubernetes setups are built to work under ideal conditions. Node failures and bad deployments expose gaps that were never designed for.</p>
+          <p class="project-result">Decision: Build the entire platform around failure as a design input. Every component configured to recover automatically — no human intervention required.</p>
+          <div class="project-proof">⚡ Node recovery: 20–46s &nbsp;·&nbsp; Rollback: 32s &nbsp;·&nbsp; Zero blast radius</div>
+          <div class="project-footer">
+            <div class="project-github">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              velrite/auto-healing-kubernetes-platform
+            </div>
+            <div class="project-arrow">↗</div>
+          </div>
+        </div>
+      </a>
 
-      <div class="project-card">
-        <div class="project-card-top">
-          <div class="project-folder">📁</div>
-          <a href="https://github.com/velrite/Terraform-Kubernetes-Platform" target="_blank" class="project-link">GitHub ↗</a>
+      <!-- PROJECT 2 -->
+      <a class="project-card" href="https://github.com/velrite/Terraform-Kubernetes-Platform" target="_blank">
+        <div class="project-diagram">
+          <svg class="diagram-svg" viewBox="0 0 320 150" xmlns="http://www.w3.org/2000/svg">
+            <!-- Git repo -->
+            <rect x="110" y="8" width="100" height="26" rx="3" fill="rgba(79,142,247,0.12)" stroke="#4f8ef7" stroke-width="1"/>
+            <text x="160" y="25" class="diag-label-bright">terraform apply</text>
+            <!-- Arrow -->
+            <line x1="160" y1="34" x2="160" y2="50" stroke="#4f8ef7" stroke-width="1.5"/>
+            <polygon points="156,48 164,48 160,54" fill="#4f8ef7"/>
+            <!-- State file -->
+            <rect x="115" y="52" width="90" height="22" rx="3" fill="#13131f" stroke="#2a2a45" stroke-width="1"/>
+            <text x="160" y="67" class="diag-label">state file ← truth</text>
+            <!-- Namespaces -->
+            <line x1="115" y1="74" x2="50" y2="92" stroke="#2a2a45" stroke-width="1" stroke-dasharray="3,2"/>
+            <line x1="137" y1="74" x2="120" y2="92" stroke="#2a2a45" stroke-width="1" stroke-dasharray="3,2"/>
+            <line x1="183" y1="74" x2="200" y2="92" stroke="#2a2a45" stroke-width="1" stroke-dasharray="3,2"/>
+            <line x1="205" y1="74" x2="270" y2="92" stroke="#2a2a45" stroke-width="1" stroke-dasharray="3,2"/>
+            <rect x="14" y="92" width="72" height="22" rx="3" fill="#13131f" stroke="#2a2a45" stroke-width="1"/>
+            <text x="50" y="107" class="diag-label">monitoring</text>
+            <rect x="94" y="92" width="52" height="22" rx="3" fill="#13131f" stroke="#2a2a45" stroke-width="1"/>
+            <text x="120" y="107" class="diag-label">app</text>
+            <rect x="174" y="92" width="52" height="22" rx="3" fill="#13131f" stroke="#2a2a45" stroke-width="1"/>
+            <text x="200" y="107" class="diag-label">security</text>
+            <rect x="234" y="92" width="72" height="22" rx="3" fill="#13131f" stroke="#2a2a45" stroke-width="1"/>
+            <text x="270" y="107" class="diag-label">infra</text>
+            <!-- Label -->
+            <text x="160" y="135" class="diag-label" fill="#34d399">reproducible · declarative · no drift</text>
+          </svg>
         </div>
-        <h3>Terraform Kubernetes Platform</h3>
-        <p class="project-desc">Entire Kubernetes infrastructure provisioned declaratively through Terraform modules — reproducible from a single command.</p>
-        <div class="project-proof">⚡ 13 resources under Terraform &nbsp;·&nbsp; 4 namespaces &nbsp;·&nbsp; Zero manual kubectl</div>
-      </div>
+        <div class="project-body">
+          <div class="project-tag">Infrastructure as Code</div>
+          <h3>Terraform Kubernetes Platform</h3>
+          <p class="project-problem">Problem: Managing infrastructure with kubectl means mentally tracking what was applied, what wasn't, and whether the cluster matches intent. That breaks down under pressure.</p>
+          <p class="project-result">Decision: Move everything to Terraform so the state file owns the truth — not memory, not hope. Entire platform reproducible from a single command.</p>
+          <div class="project-proof">⚡ Declarative across 4 namespaces &nbsp;·&nbsp; Zero manual kubectl &nbsp;·&nbsp; Drift detectable at any time</div>
+          <div class="project-footer">
+            <div class="project-github">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              velrite/Terraform-Kubernetes-Platform
+            </div>
+            <div class="project-arrow">↗</div>
+          </div>
+        </div>
+      </a>
 
-      <div class="project-card">
-        <div class="project-card-top">
-          <div class="project-folder">📁</div>
-          <a href="https://github.com/velrite/Dockerize-Everything" target="_blank" class="project-link">GitHub ↗</a>
+      <!-- PROJECT 3 -->
+      <a class="project-card" href="https://github.com/velrite/Dockerize-Everything" target="_blank">
+        <div class="project-diagram">
+          <svg class="diagram-svg" viewBox="0 0 320 150" xmlns="http://www.w3.org/2000/svg">
+            <!-- 6 services in 2 rows, network-segmented -->
+            <!-- Net A -->
+            <rect x="8" y="8" width="142" height="64" rx="4" fill="none" stroke="#2a2a45" stroke-width="1" stroke-dasharray="4,3"/>
+            <text x="79" y="20" class="diag-label" fill="#4f8ef7">network: frontend</text>
+            <rect x="16" y="26" width="56" height="38" rx="3" fill="#13131f" stroke="#2a2a45" stroke-width="1"/>
+            <text x="44" y="44" class="diag-label">nginx</text>
+            <text x="44" y="56" class="diag-label" fill="#34d399">non-root</text>
+            <rect x="82" y="26" width="56" height="38" rx="3" fill="#13131f" stroke="#2a2a45" stroke-width="1"/>
+            <text x="110" y="44" class="diag-label">flask</text>
+            <text x="110" y="56" class="diag-label" fill="#34d399">186MB</text>
+            <!-- Net B -->
+            <rect x="170" y="8" width="142" height="64" rx="4" fill="none" stroke="#2a2a45" stroke-width="1" stroke-dasharray="4,3"/>
+            <text x="241" y="20" class="diag-label" fill="#4f8ef7">network: backend</text>
+            <rect x="178" y="26" width="56" height="38" rx="3" fill="#13131f" stroke="#2a2a45" stroke-width="1"/>
+            <text x="206" y="44" class="diag-label">postgres</text>
+            <text x="206" y="56" class="diag-label" fill="#34d399">isolated</text>
+            <rect x="244" y="26" width="56" height="38" rx="3" fill="#13131f" stroke="#2a2a45" stroke-width="1"/>
+            <text x="272" y="44" class="diag-label">redis</text>
+            <text x="272" y="56" class="diag-label" fill="#34d399">isolated</text>
+            <!-- Trivy scan line -->
+            <rect x="8" y="84" width="304" height="22" rx="3" fill="rgba(79,142,247,0.06)" stroke="rgba(79,142,247,0.2)" stroke-width="1"/>
+            <text x="160" y="99" class="diag-label" fill="#4f8ef7">Trivy scan → every build → pinned to Git commit</text>
+            <!-- Health checks -->
+            <text x="160" y="130" class="diag-label" fill="#34d399">health checks · resource limits · multi-stage builds</text>
+          </svg>
         </div>
-        <h3>Dockerize-Everything</h3>
-        <p class="project-desc">Production-oriented multi-service Docker platform built around one principle — contain the blast radius.</p>
-        <div class="project-proof">⚡ 6 services &nbsp;·&nbsp; Network segmentation &nbsp;·&nbsp; Trivy scanning every build</div>
-      </div>
+        <div class="project-body">
+          <div class="project-tag">Zero-Trust Security</div>
+          <h3>Dockerize-Everything</h3>
+          <p class="project-problem">Problem: Running containers in development is easy. Running six interdependent services with proper security, resource isolation, and startup ordering is a different problem entirely.</p>
+          <p class="project-result">Decision: Apply production patterns from day one — network segmentation, resource limits, health checks, non-root users, multi-stage builds, and automated vulnerability scanning on every build.</p>
+          <div class="project-proof">⚡ Flask image: 186MB, zero build tools in prod &nbsp;·&nbsp; Trivy scan on every build &nbsp;·&nbsp; Every deploy pinned to a Git commit</div>
+          <div class="project-footer">
+            <div class="project-github">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              velrite/Dockerize-Everything
+            </div>
+            <div class="project-arrow">↗</div>
+          </div>
+        </div>
+      </a>
 
     </div>
-  </section>
+  </div>
+</div>
 
-  <!-- PROOF -->
-  <div id="proof">
-    <div class="proof-inner">
-      <div class="section-label">Proof</div>
-      <h2>Real numbers.<br>Real systems.</h2>
-      <div class="proof-grid">
-        <div class="proof-card">
-          <div class="proof-number">20–46s</div>
-          <div class="proof-label">Node Failure Recovery</div>
+<!-- PROOF -->
+<div id="proof" class="full-bleed">
+  <div class="full-bleed-inner">
+    <div class="section-label">Proof</div>
+    <h2>Real systems.<br>Measured results.</h2>
+    <div class="proof-grid">
+      <div class="proof-card">
+        <div class="proof-number">20–46s</div>
+        <div class="proof-label">Node Recovery</div>
+        <div class="proof-context">Simulated failures, 3-node cluster, measured across multiple runs</div>
+      </div>
+      <div class="proof-card">
+        <div class="proof-number">32s</div>
+        <div class="proof-label">Automated Rollback</div>
+        <div class="proof-context">Bad deployment detected and rolled back without human intervention</div>
+      </div>
+      <div class="proof-card">
+        <div class="proof-number">Zero</div>
+        <div class="proof-label">Blast Radius</div>
+        <div class="proof-context">Deployment failures contained — zero customer impact via readiness probe gating</div>
+      </div>
+      <div class="proof-card">
+        <div class="proof-number">Zero</div>
+        <div class="proof-label">Static Credentials</div>
+        <div class="proof-context">Eliminates entire class of credential leak incidents across all environments</div>
+      </div>
+      <div class="proof-card">
+        <div class="proof-number">36</div>
+        <div class="proof-label">Alert Rules</div>
+        <div class="proof-context">Alerting focused on SLO-impacting failures — reduces alert fatigue</div>
+      </div>
+      <div class="proof-card">
+        <div class="proof-number">100%</div>
+        <div class="proof-label">Cost Visibility</div>
+        <div class="proof-context">Infrastructure cost visible per service from day one — no surprise cloud bills</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div id="contact">
+  <div class="section-wrap">
+    <div class="contact-grid">
+      <div class="contact-left">
+        <div class="section-label">Contact</div>
+        <h2>This engineer has already solved the problems you're paying your team to solve.</h2>
+        <p>Open to remote contract engagements. Response within 24 hours.</p>
+        <div class="services-offered">
+          <div class="service-pill">Platform Engineering</div>
+          <div class="service-pill">Kubernetes Infrastructure</div>
+          <div class="service-pill">Reliability Engineering</div>
+          <div class="service-pill">Cloud Cost Optimization</div>
+          <div class="service-pill">DevSecOps</div>
         </div>
-        <div class="proof-card">
-          <div class="proof-number">32s</div>
-          <div class="proof-label">Automated Rollback</div>
-        </div>
-        <div class="proof-card">
-          <div class="proof-number">Zero</div>
-          <div class="proof-label">Blast Radius</div>
-        </div>
-        <div class="proof-card">
-          <div class="proof-number">13</div>
-          <div class="proof-label">Terraform Managed Resources</div>
-        </div>
-        <div class="proof-card">
-          <div class="proof-number">36</div>
-          <div class="proof-label">Prometheus Alert Rules</div>
-        </div>
-        <div class="proof-card">
-          <div class="proof-number">6</div>
-          <div class="proof-label">Hardened Docker Services</div>
+        <div class="availability">Available for remote contracts — US & Canada</div>
+      </div>
+      <div class="contact-right">
+        <div class="contact-links">
+          <a href="mailto:velrite.tech@gmail.com" class="contact-link">
+            <div class="contact-link-left">
+              <div class="contact-link-icon">✉️</div>
+              <div class="contact-link-text">
+                <strong>Email</strong>
+                <span>velrite.tech@gmail.com</span>
+              </div>
+            </div>
+            <div class="contact-link-arrow">→</div>
+          </a>
+          <a href="https://linkedin.com/in/olamide-olalekan-12138a265" target="_blank" class="contact-link">
+            <div class="contact-link-left">
+              <div class="contact-link-icon">💼</div>
+              <div class="contact-link-text">
+                <strong>LinkedIn</strong>
+                <span>olamide-olalekan</span>
+              </div>
+            </div>
+            <div class="contact-link-arrow">→</div>
+          </a>
+          <a href="https://github.com/velrite" target="_blank" class="contact-link">
+            <div class="contact-link-left">
+              <div class="contact-link-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="#c8d0e0"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              </div>
+              <div class="contact-link-text">
+                <strong>GitHub</strong>
+                <span>github.com/velrite</span>
+              </div>
+            </div>
+            <div class="contact-link-arrow">→</div>
+          </a>
+          <a href="https://linkedin.com/in/olamide-olalekan-12138a265" target="_blank" class="contact-link">
+            <div class="contact-link-left">
+              <div class="contact-link-icon">✍️</div>
+              <div class="contact-link-text">
+                <strong>Writing</strong>
+                <span>Technical posts on LinkedIn</span>
+              </div>
+            </div>
+            <div class="contact-link-arrow">→</div>
+          </a>
         </div>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="section-label">Contact</div>
-    <h2>Let's work together.</h2>
-    <div class="contact-inner">
-      <p>Open to remote contracts and consulting engagements. Response within 24 hours.</p>
-      <div class="contact-links">
-        <a href="mailto:velrite.tech@gmail.com" class="contact-link">
-          <span>✉️</span>
-          <span>velrite.tech@gmail.com</span>
-        </a>
-        <a href="https://linkedin.com/in/olamide-olalekan-12138a265" target="_blank" class="contact-link">
-          <span>💼</span>
-          <span>linkedin.com/in/olamide-olalekan-12138a265</span>
-        </a>
-        <a href="https://github.com/velrite" target="_blank" class="contact-link">
-          <span>🐙</span>
-          <span>github.com/velrite</span>
-        </a>
-      </div>
-      <div class="availability">Available for remote contracts — US and Canada</div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <p>Olamide Olalekan &nbsp;·&nbsp; Platform Engineer &nbsp;·&nbsp; velrite.github.io</p>
-  </footer>
+<!-- FOOTER -->
+<footer>
+  <span>Olamide Olalekan &nbsp;·&nbsp; Platform & DevSecOps Engineer</span>
+  <span>velrite.github.io</span>
+</footer>
 
 </body>
 </html>
