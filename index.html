@@ -52,29 +52,15 @@
       backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
     }
-    .nav-logo {
-      display: flex; align-items: center; gap: 0.7rem; text-decoration: none;
-    }
-    .nav-logo-mark {
-      width: 34px; height: 34px; flex-shrink: 0;
-    }
-    .nav-logo-text {
-      display: flex; flex-direction: column; line-height: 1;
-    }
-    .nav-logo-name {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.1rem; letter-spacing: 0.12em;
-      color: var(--bright);
-    }
-    .nav-logo-role {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.58rem; letter-spacing: 0.14em;
-      color: var(--accent); text-transform: uppercase;
-    }
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-logo { display: flex; align-items: center; gap: 0.7rem; text-decoration: none; }
+    .nav-logo-mark { width: 34px; height: 34px; flex-shrink: 0; }
+    .nav-logo-text { display: flex; flex-direction: column; line-height: 1; }
+    .nav-logo-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 0.12em; color: var(--bright); }
+    .nav-logo-role { font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.14em; color: var(--accent); text-transform: uppercase; }
+    .nav-links { display: flex; gap: 1.8rem; list-style: none; }
     .nav-links a {
       color: var(--muted); text-decoration: none;
-      font-family: 'DM Mono', monospace; font-size: 0.72rem;
+      font-family: 'DM Mono', monospace; font-size: 0.7rem;
       letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s;
     }
     .nav-links a:hover { color: var(--bright); }
@@ -143,7 +129,7 @@
     .hero-location {
       font-family: 'DM Mono', monospace; font-size: 0.72rem;
       color: var(--muted); letter-spacing: 0.1em;
-      margin-bottom: 2.8rem; display: flex; align-items: center; gap: 0.5rem;
+      margin-bottom: 2.8rem; display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;
       opacity: 0; animation: fadeUp 0.7s ease 0.5s forwards;
     }
     .hero-location span { color: var(--border-bright); margin: 0 0.4rem; }
@@ -215,23 +201,23 @@
 
     /* ── SERVICES ── */
     .services-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 1px; border: 1px solid var(--border); border-radius: 4px; overflow: hidden;
     }
     .service-card {
-      background: var(--surface2); padding: 2.2rem 2rem;
+      background: var(--surface2); padding: 2.2rem 1.8rem;
       transition: background 0.25s; position: relative;
     }
     .service-card::after {
-      content: ''; position: absolute; bottom: 0; left: 2rem; right: 2rem;
+      content: ''; position: absolute; bottom: 0; left: 1.8rem; right: 1.8rem;
       height: 2px; background: var(--accent);
       transform: scaleX(0); transition: transform 0.3s ease; transform-origin: left;
     }
     .service-card:hover { background: #16162a; }
     .service-card:hover::after { transform: scaleX(1); }
     .service-num { font-family: 'DM Mono', monospace; font-size: 0.66rem; color: var(--accent); letter-spacing: 0.15em; margin-bottom: 1.2rem; opacity: 0.5; }
-    .service-card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: 0.08em; color: var(--bright); margin-bottom: 0.8rem; }
-    .service-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.75; }
+    .service-card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; letter-spacing: 0.06em; color: var(--bright); margin-bottom: 0.8rem; }
+    .service-card p { font-size: 0.83rem; color: var(--muted); line-height: 1.75; }
 
     /* ── PROJECTS ── */
     #projects { border-top: 1px solid var(--border); }
@@ -243,6 +229,7 @@
       transition: border-color 0.25s, transform 0.2s;
     }
     .project-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.4); }
+    .project-card.featured { border-color: rgba(79,142,247,0.35); }
 
     .project-diagram {
       width: 100%; background: var(--surface2); border-bottom: 1px solid var(--border);
@@ -251,18 +238,32 @@
     .diagram-svg { width: 100%; height: auto; max-width: 360px; }
 
     .project-body { padding: 1.8rem; flex: 1; display: flex; flex-direction: column; }
+    .project-tag-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem; }
     .project-tag {
       font-family: 'DM Mono', monospace; font-size: 0.66rem; letter-spacing: 0.15em;
-      text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem;
+      text-transform: uppercase; color: var(--accent);
+    }
+    .project-new-badge {
+      font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em;
+      color: var(--green); background: var(--green-dim);
+      border: 1px solid rgba(52,211,153,0.25); border-radius: 3px;
+      padding: 0.15rem 0.5rem; text-transform: uppercase;
     }
     .project-card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: 0.06em; color: var(--bright); margin-bottom: 0.6rem; }
     .project-problem { font-size: 0.83rem; color: var(--muted); line-height: 1.7; margin-bottom: 0.7rem; }
     .project-result { font-size: 0.83rem; color: var(--text); line-height: 1.7; margin-bottom: 1rem; flex: 1; }
     .project-proof {
       background: var(--accent-dim); border: 1px solid rgba(79,142,247,0.2); border-radius: 3px;
-      padding: 0.6rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.73rem;
+      padding: 0.6rem 1rem; font-family: 'DM Mono', monospace; font-size: 0.72rem;
       color: var(--accent); line-height: 1.6; margin-bottom: 1rem;
     }
+    .project-explainer {
+      font-size: 0.78rem; color: var(--muted); line-height: 1.7;
+      margin-bottom: 1rem; padding: 0.7rem 0.9rem;
+      background: rgba(255,255,255,0.02); border-left: 2px solid var(--border-bright);
+      border-radius: 2px;
+    }
+    .project-explainer strong { color: var(--text); }
 
     /* ── CASE STUDY ── */
     .cs-btn {
@@ -272,7 +273,7 @@
       background: var(--surface2); border: 1px solid var(--border);
       border-radius: 3px; padding: 0.55rem 1rem;
       cursor: pointer; transition: border-color 0.2s, color 0.2s, background 0.2s;
-      margin-bottom: 0; width: 100%;
+      width: 100%;
     }
     .cs-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--bg); }
     .cs-btn .cs-icon {
@@ -293,7 +294,7 @@
       transition: max-height 0.45s cubic-bezier(0.4,0,0.2,1);
       margin-top: 0;
     }
-    .cs-panel.open { max-height: 700px; margin-top: 0.8rem; }
+    .cs-panel.open { max-height: 900px; margin-top: 0.8rem; }
 
     .cs-inner {
       background: rgba(79,142,247,0.03);
@@ -332,27 +333,63 @@
     .proof-card:hover { background: #16162a; }
     .proof-number {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(2rem, 4vw, 3rem);
+      font-size: clamp(1.8rem, 3.6vw, 2.8rem);
       color: var(--accent); letter-spacing: 0.04em; line-height: 1; margin-bottom: 0.4rem;
     }
     .proof-label {
-      font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--muted);
+      font-family: 'DM Mono', monospace; font-size: 0.66rem; color: var(--muted);
       text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.4rem;
     }
-    .proof-context { font-size: 0.75rem; color: var(--border-bright); line-height: 1.5; }
+    .proof-context { font-size: 0.73rem; color: var(--border-bright); line-height: 1.5; }
 
     /* ── VIDEO ── */
     #video { border-top: 1px solid var(--border); }
     .video-intro { max-width: 600px; margin-bottom: 2.5rem; }
     .video-intro p { color: var(--muted); font-size: 0.97rem; line-height: 1.8; }
+
     .video-wrap {
       position: relative; width: 100%; padding-bottom: 56.25%;
       border-radius: 6px; overflow: hidden;
       border: 1px solid var(--border);
       box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+      background: #000; cursor: pointer;
     }
     .video-wrap iframe {
       position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;
+    }
+    .video-poster {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      background: linear-gradient(135deg, #0e0e1a 0%, #0a0a14 100%);
+      display: flex; align-items: center; justify-content: center;
+      transition: opacity 0.3s;
+    }
+    .video-poster.hidden { opacity: 0; pointer-events: none; }
+    .video-poster-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(79,142,247,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(79,142,247,0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .play-btn-group {
+      position: relative; z-index: 2; display: flex; flex-direction: column;
+      align-items: center; gap: 1rem;
+    }
+    .play-btn {
+      width: 76px; height: 76px; border-radius: 50%;
+      background: rgba(79,142,247,0.15); border: 2px solid var(--accent);
+      display: flex; align-items: center; justify-content: center;
+      transition: transform 0.2s, background 0.2s; backdrop-filter: blur(4px);
+    }
+    .video-wrap:hover .play-btn { transform: scale(1.08); background: rgba(79,142,247,0.25); }
+    .play-btn svg { width: 26px; height: 26px; fill: var(--bright); margin-left: 3px; }
+    .play-btn-label {
+      font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em;
+      color: var(--bright); text-transform: uppercase; text-align: center;
+    }
+    .play-btn-sub {
+      font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--muted);
+      text-align: center; margin-top: 0.2rem;
     }
     .video-caption {
       margin-top: 1.2rem; font-family: 'DM Mono', monospace; font-size: 0.72rem;
@@ -424,6 +461,8 @@
       .hero-buttons { flex-direction: column; }
       footer { flex-direction: column; gap: 0.5rem; text-align: center; }
       .nav-logo-text { display: none; }
+      .play-btn { width: 60px; height: 60px; }
+      .play-btn svg { width: 20px; height: 20px; }
     }
   </style>
 </head>
@@ -481,7 +520,7 @@
       That is the standard I build to.
     </div>
     <div class="hero-location">
-      🌍 velrite.github.io <span>·</span> Kubernetes <span>·</span> Terraform <span>·</span> Reliability Engineering <span>·</span> Cloud Cost Visibility
+      🌍 velrite.github.io <span>·</span> Kubernetes <span>·</span> GitOps <span>·</span> Terraform <span>·</span> Reliability Engineering
     </div>
     <div class="hero-buttons">
       <a href="#projects" class="btn-primary">View My Work</a>
@@ -499,23 +538,23 @@
       <div class="about-text">
         <p>My foundation is Mechatronics — a discipline that forces you to hold mechanical, electrical, and software systems in your head simultaneously. That training shaped how I approach infrastructure: not as a collection of tools, but as a system with failure modes to anticipate and contain.</p>
         <p class="about-highlight">"Failure is inevitable. The goal is to make recovery predictable."</p>
-        <p>I work at the intersection of reliability engineering, platform automation, and cloud cost visibility — building platforms that are boring to operate because they handle the hard parts themselves. Former lead instructor. I build things and explain them clearly.</p>
+        <p>I work at the intersection of reliability engineering, deployment governance, and infrastructure automation — building platforms that are boring to operate because they handle the hard parts themselves. Former lead instructor. I build things and explain them clearly.</p>
       </div>
       <div class="about-sidebar">
         <h3>Core Stack</h3>
         <ul class="stack-list">
           <li>Kubernetes</li><li>Terraform</li><li>Docker</li>
+          <li>ArgoCD</li><li>Argo Rollouts</li>
           <li>Prometheus</li><li>GitHub Actions</li><li>AWS</li>
           <li>Helm</li><li>Vault</li><li>OpenCost</li>
-          <li>Go</li><li>Python</li>
+          <li>Python</li>
         </ul>
         <h3>Disciplines</h3>
         <ul class="stack-list">
           <li>Reliability Engineering</li>
-          <li>Kubernetes Platform Engineering</li>
-          <li>Terraform Infrastructure</li>
+          <li>GitOps & Progressive Delivery</li>
+          <li>Infrastructure as Code</li>
           <li>Zero-Trust Security</li>
-          <li>FinOps</li><li>DevSecOps</li>
         </ul>
       </div>
     </div>
@@ -526,27 +565,32 @@
 <div id="services" class="full-bleed">
   <div class="full-bleed-inner">
     <div class="section-label">What I Do</div>
-    <h2>FOUR DISCIPLINES.<br>ONE OPERATING STANDARD.</h2>
+    <h2>FIVE DISCIPLINES.<br>ONE OPERATING STANDARD.</h2>
     <div class="services-grid">
       <div class="service-card">
         <div class="service-num">01</div>
         <h3>Reliability Engineering</h3>
-        <p>Simulated node failures recovered in 20–46 seconds automatically. Platforms designed so failure is expected, isolated, and recovered from — without human intervention.</p>
+        <p>Simulated node failures recovered in 20–46 seconds automatically. Failure is expected, isolated, and recovered from — without human intervention.</p>
       </div>
       <div class="service-card">
         <div class="service-num">02</div>
-        <h3>FinOps & Cost Visibility</h3>
-        <p>Full cost attribution per service from day one. No surprise cloud bills. Every dollar traced to a workload — visibility built into the platform, not bolted on later.</p>
+        <h3>GitOps & Progressive Delivery</h3>
+        <p>Git as the single source of truth. Configuration drift detected and reconciled automatically. Canary deployments promoted or rolled back based on real-time SLOs.</p>
       </div>
       <div class="service-card">
         <div class="service-num">03</div>
-        <h3>Zero-Trust Security</h3>
-        <p>Network segmentation, non-root containers, no static credentials, policy enforcement at every layer. Deployment failures contained — no observed customer impact.</p>
+        <h3>Infrastructure as Code</h3>
+        <p>Entire environments provisioned declaratively. Reproducible from a single command. The state file owns the truth. No manual configuration. No drift.</p>
       </div>
       <div class="service-card">
         <div class="service-num">04</div>
-        <h3>Infrastructure as Code</h3>
-        <p>Entire environments provisioned declaratively. Reproducible from a single command. The state file owns the truth. No manual configuration. No drift. No surprises.</p>
+        <h3>Zero-Trust Security</h3>
+        <p>Network segmentation, non-root containers, no static credentials anywhere. Deployment failures contained — no observed customer impact.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-num">05</div>
+        <h3>FinOps & Cost Visibility</h3>
+        <p>Full cost attribution per service from day one. No surprise cloud bills. Every dollar traced to a workload.</p>
       </div>
     </div>
   </div>
@@ -559,7 +603,7 @@
     <h2>BUILT IN PUBLIC.<br>NUMBERS BEHIND EVERY CLAIM.</h2>
     <div class="projects-grid">
 
-      <!-- PROJECT 1 -->
+      <!-- PROJECT 1 — AUTO-HEALING -->
       <div class="project-card">
         <div class="project-diagram">
           <svg class="diagram-svg" viewBox="0 0 360 185" xmlns="http://www.w3.org/2000/svg">
@@ -598,8 +642,9 @@
           </svg>
         </div>
         <div class="project-body">
-          <div class="project-tag">Reliability Engineering</div>
+          <div class="project-tag-row"><div class="project-tag">Reliability Engineering</div></div>
           <h3>Auto-Healing Kubernetes Platform</h3>
+          <p class="project-explainer"><strong>In plain terms:</strong> When a server hosting part of your application dies, this platform notices within seconds, moves the work to a healthy server, and keeps your app running — with no engineer paged at 3am.</p>
           <p class="project-problem"><strong style="color:var(--bright)">Problem:</strong> Most Kubernetes setups are built to work under ideal conditions. Node failures expose gaps that were never designed for.</p>
           <p class="project-result"><strong style="color:var(--bright)">Decision:</strong> Build the entire platform around failure as a design input. Every component recovers automatically — no human required.</p>
           <div class="project-proof">⚡ Node recovery: 20–46s &nbsp;·&nbsp; Rollback: 32s &nbsp;·&nbsp; No customer impact observed</div>
@@ -616,7 +661,7 @@
               </div>
               <div class="cs-row">
                 <div class="cs-label-text">Failure Scenario</div>
-                <div class="cs-text">Simulated node failure mid-workload. Control plane detected unresponsive node, evicted pods, rescheduled to healthy nodes automatically — across multiple test runs.</div>
+                <div class="cs-text">Simulated node failure mid-workload. Control plane detected the unresponsive node, evicted pods, rescheduled to healthy nodes automatically — across multiple test runs.</div>
               </div>
               <div class="cs-row">
                 <div class="cs-label-text">Key Tradeoff</div>
@@ -640,7 +685,90 @@
         </div>
       </div>
 
-      <!-- PROJECT 2 -->
+      <!-- PROJECT 2 — GITOPS CONTROL PLANE (NEW, FEATURED) -->
+      <div class="project-card featured">
+        <div class="project-diagram">
+          <svg class="diagram-svg" viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <text x="180" y="13" font-family="monospace" font-size="7.5" fill="#4f8ef7" text-anchor="middle" letter-spacing="2">GITOPS CONTROL PLANE</text>
+            <!-- vertical pipeline -->
+            <rect x="130" y="20" width="100" height="18" rx="2" fill="rgba(79,142,247,0.1)" stroke="#4f8ef7" stroke-width="1"/>
+            <text x="180" y="32.5" font-family="monospace" font-size="7.5" fill="#c8d0e0" text-anchor="middle">Git Repository</text>
+            <line x1="180" y1="38" x2="180" y2="48" stroke="#4f8ef7" stroke-width="1.3"/>
+            <polygon points="176.5,46.5 183.5,46.5 180,52" fill="#4f8ef7"/>
+            <rect x="120" y="50" width="120" height="18" rx="2" fill="rgba(79,142,247,0.12)" stroke="#4f8ef7" stroke-width="1"/>
+            <text x="180" y="62.5" font-family="monospace" font-size="7.5" fill="#c8d0e0" text-anchor="middle">Pull Request Review</text>
+            <line x1="180" y1="68" x2="180" y2="78" stroke="#4f8ef7" stroke-width="1.3"/>
+            <polygon points="176.5,76.5 183.5,76.5 180,82" fill="#4f8ef7"/>
+            <rect x="125" y="80" width="110" height="18" rx="2" fill="rgba(79,142,247,0.16)" stroke="#4f8ef7" stroke-width="1.5"/>
+            <text x="180" y="92.5" font-family="monospace" font-size="7.5" fill="#f0f4ff" text-anchor="middle">ArgoCD Sync</text>
+            <line x1="155" y1="98" x2="90" y2="112" stroke="#2a2a45" stroke-width="1" stroke-dasharray="3,2"/>
+            <line x1="205" y1="98" x2="270" y2="112" stroke="#2a2a45" stroke-width="1" stroke-dasharray="3,2"/>
+            <rect x="50" y="112" width="80" height="20" rx="2" fill="#13131f" stroke="#2a2a45" stroke-width="1"/>
+            <text x="90" y="125.5" font-family="monospace" font-size="7.5" fill="#8899bb" text-anchor="middle">Staging</text>
+            <rect x="230" y="112" width="80" height="20" rx="2" fill="#13131f" stroke="#2a2a45" stroke-width="1"/>
+            <text x="270" y="125.5" font-family="monospace" font-size="7.5" fill="#8899bb" text-anchor="middle">Production</text>
+            <line x1="270" y1="132" x2="270" y2="142" stroke="#2a2a45" stroke-width="1" stroke-dasharray="2,2"/>
+            <rect x="225" y="144" width="90" height="18" rx="2" fill="rgba(239,68,68,0.08)" stroke="#ef4444" stroke-width="1"/>
+            <text x="270" y="156" font-family="monospace" font-size="7.5" fill="#ef4444" text-anchor="middle">Argo Rollouts: Canary</text>
+            <line x1="270" y1="162" x2="270" y2="172" stroke="#2a2a45" stroke-width="1" stroke-dasharray="2,2"/>
+            <rect x="220" y="174" width="100" height="18" rx="2" fill="rgba(52,211,153,0.08)" stroke="#34d399" stroke-width="1"/>
+            <text x="270" y="186" font-family="monospace" font-size="7.5" fill="#34d399" text-anchor="middle">Promote / Rollback by SLO</text>
+            <!-- drift box left side -->
+            <line x1="90" y1="132" x2="90" y2="142" stroke="#2a2a45" stroke-width="1" stroke-dasharray="2,2"/>
+            <rect x="20" y="144" width="140" height="48" rx="2" fill="rgba(239,68,68,0.05)" stroke="#ef4444" stroke-width="1" stroke-dasharray="3,2"/>
+            <text x="90" y="158" font-family="monospace" font-size="7" fill="#ef4444" text-anchor="middle">kubectl scale (manual)</text>
+            <text x="90" y="170" font-family="monospace" font-size="7" fill="#8899bb" text-anchor="middle">↳ drift detected</text>
+            <text x="90" y="182" font-family="monospace" font-size="7" fill="#34d399" text-anchor="middle">↳ auto-reconciled</text>
+          </svg>
+        </div>
+        <div class="project-body">
+          <div class="project-tag-row">
+            <div class="project-tag">GitOps & Progressive Delivery</div>
+            <div class="project-new-badge">Featured</div>
+          </div>
+          <h3>GitOps Control Plane</h3>
+          <p class="project-explainer"><strong>In plain terms:</strong> Nobody can quietly change production by hand anymore. Every change goes through Git, gets reviewed, and the cluster auto-corrects itself if it ever drifts from what was approved. Rollback is a single git revert — not a panic-driven script.</p>
+          <p class="project-problem"><strong style="color:var(--bright)">Problem:</strong> Traditional CI/CD pipelines push changes directly into clusters and hold deployment credentials externally. Under pressure, clusters slowly diverge from intended state with no one noticing.</p>
+          <p class="project-result"><strong style="color:var(--bright)">Decision:</strong> Move deployment authority into the cluster. Git becomes the source of truth — ArgoCD continuously reconciles live state to Git, while Argo Rollouts governs production promotion through SLO-driven canary analysis.</p>
+          <div class="project-proof">⚡ Drift corrected within seconds &nbsp;·&nbsp; Canary promotion via SLOs &nbsp;·&nbsp; Zero cluster credentials in CI</div>
+          <button class="cs-btn" onclick="toggleCS(this,'cs2')">
+            <span class="cs-icon">+</span>
+            <span class="cs-label">Case Study</span>
+            <span class="cs-tag">Architecture · Tradeoffs · Result</span>
+          </button>
+          <div class="cs-panel" id="cs2">
+            <div class="cs-inner">
+              <div class="cs-row">
+                <div class="cs-label-text">Architecture</div>
+                <div class="cs-text">Terraform provisions ArgoCD and Argo Rollouts. ApplicationSets generate staging and production environments from a single source definition. Kustomize overlays maintain environment parity while allowing controlled divergence where required.</div>
+              </div>
+              <div class="cs-row">
+                <div class="cs-label-text">Failure Scenario</div>
+                <div class="cs-text">Manual deployment drift introduced via a direct kubectl scale command. ArgoCD detected the divergence from Git, marked the application OutOfSync, and automatically reconciled the cluster back to the declared state — within seconds, validated across multiple test runs.</div>
+              </div>
+              <div class="cs-row">
+                <div class="cs-label-text">Key Tradeoff</div>
+                <div class="cs-text">Deployment speed sacrificed for deployment safety. Production promotion requires metric validation before traffic shifts continue. Slower releases. Far lower blast radius.</div>
+              </div>
+              <div class="cs-row">
+                <div class="cs-label-text">Result</div>
+                <div class="cs-text">Drift automatically remediated. Environment consistency enforced through Git. Production deployments governed by SLO-based canary analysis. Cluster credentials removed entirely from CI/CD workflows. HashiCorp Vault injects credentials dynamically at runtime — no secrets ever stored in Git.</div>
+              </div>
+            </div>
+          </div>
+          <div class="project-footer">
+            <a href="https://github.com/velrite/gitops-argocd-platform" target="_blank" class="project-gh-link">
+              <div class="gh-left">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                velrite/gitops-argocd-platform
+              </div>
+              <span>↗</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROJECT 3 — TERRAFORM -->
       <div class="project-card">
         <div class="project-diagram">
           <svg class="diagram-svg" viewBox="0 0 360 185" xmlns="http://www.w3.org/2000/svg">
@@ -672,17 +800,18 @@
           </svg>
         </div>
         <div class="project-body">
-          <div class="project-tag">Infrastructure as Code</div>
+          <div class="project-tag-row"><div class="project-tag">Infrastructure as Code</div></div>
           <h3>Terraform Kubernetes Platform</h3>
+          <p class="project-explainer"><strong>In plain terms:</strong> The entire cluster setup is written as code. Need a copy of the whole environment? One command rebuilds it exactly — no tribal knowledge, no manual clicking.</p>
           <p class="project-problem"><strong style="color:var(--bright)">Problem:</strong> Managing infrastructure with kubectl means mentally tracking what was applied. That breaks down under pressure.</p>
           <p class="project-result"><strong style="color:var(--bright)">Decision:</strong> Move everything to Terraform so the state file owns the truth — not memory, not hope.</p>
           <div class="project-proof">⚡ Declarative across 4 namespaces &nbsp;·&nbsp; Zero manual kubectl &nbsp;·&nbsp; Drift detectable at any time</div>
-          <button class="cs-btn" onclick="toggleCS(this,'cs2')">
+          <button class="cs-btn" onclick="toggleCS(this,'cs3')">
             <span class="cs-icon">+</span>
             <span class="cs-label">Case Study</span>
             <span class="cs-tag">Architecture · Tradeoffs · Result</span>
           </button>
-          <div class="cs-panel" id="cs2">
+          <div class="cs-panel" id="cs3">
             <div class="cs-inner">
               <div class="cs-row">
                 <div class="cs-label-text">Architecture</div>
@@ -714,7 +843,7 @@
         </div>
       </div>
 
-      <!-- PROJECT 3 -->
+      <!-- PROJECT 4 — DOCKER -->
       <div class="project-card">
         <div class="project-diagram">
           <svg class="diagram-svg" viewBox="0 0 360 185" xmlns="http://www.w3.org/2000/svg">
@@ -749,17 +878,18 @@
           </svg>
         </div>
         <div class="project-body">
-          <div class="project-tag">Zero-Trust Security</div>
+          <div class="project-tag-row"><div class="project-tag">Zero-Trust Security</div></div>
           <h3>Dockerize-Everything</h3>
+          <p class="project-explainer"><strong>In plain terms:</strong> Six connected services, each locked down individually — so if one is compromised, the breach can't spread to the database or to other services.</p>
           <p class="project-problem"><strong style="color:var(--bright)">Problem:</strong> Running six interdependent services with proper security, resource isolation, and startup ordering is not a dev problem — it is a production problem.</p>
           <p class="project-result"><strong style="color:var(--bright)">Decision:</strong> Apply production security patterns from day one — network segmentation, non-root users, multi-stage builds, vulnerability scanning on every build.</p>
           <div class="project-proof">⚡ Flask image: 186MB, zero build tools in prod &nbsp;·&nbsp; Trivy scan every build &nbsp;·&nbsp; Every deploy pinned to Git commit</div>
-          <button class="cs-btn" onclick="toggleCS(this,'cs3')">
+          <button class="cs-btn" onclick="toggleCS(this,'cs4')">
             <span class="cs-icon">+</span>
             <span class="cs-label">Case Study</span>
             <span class="cs-tag">Architecture · Tradeoffs · Result</span>
           </button>
-          <div class="cs-panel" id="cs3">
+          <div class="cs-panel" id="cs4">
             <div class="cs-inner">
               <div class="cs-row">
                 <div class="cs-label-text">Architecture</div>
@@ -771,7 +901,7 @@
               </div>
               <div class="cs-row">
                 <div class="cs-label-text">Key Tradeoff</div>
-                <div class="cs-text">Multi-stage builds increase build complexity but eliminate an entire class of supply-chain vulnerabilities. Build tools never reach the production image — attack surface shrinks with every build.</div>
+                <div class="cs-text">Multi-stage builds increase build complexity but eliminate an entire class of supply-chain vulnerabilities. Build tools never reach the production image.</div>
               </div>
               <div class="cs-row">
                 <div class="cs-label-text">Result</div>
@@ -812,14 +942,14 @@
         <div class="proof-context">Bad deployment detected and rolled back — no human intervention</div>
       </div>
       <div class="proof-card">
-        <div class="proof-number">Zero</div>
-        <div class="proof-label">Customer Impact</div>
-        <div class="proof-context">Deployment failures contained via readiness probe gating</div>
+        <div class="proof-number">Seconds</div>
+        <div class="proof-label">Drift Reconciliation</div>
+        <div class="proof-context">Manual cluster changes detected and auto-corrected by ArgoCD</div>
       </div>
       <div class="proof-card">
         <div class="proof-number">Zero</div>
         <div class="proof-label">Static Credentials</div>
-        <div class="proof-context">Eliminates entire class of credential leak incidents across all environments</div>
+        <div class="proof-context">Vault issues credentials dynamically — eliminates leak-class incidents</div>
       </div>
       <div class="proof-card">
         <div class="proof-number">36</div>
@@ -843,13 +973,17 @@
     <div class="video-intro">
       <p>This is the auto-healing Kubernetes platform running live. A node fails. The platform detects it, evicts workloads, reschedules them — all within 46 seconds. No manual intervention. No alert fatigue. Just recovery.</p>
     </div>
-    <div class="video-wrap">
-      <iframe
-        src="https://www.youtube.com/embed/euR5YDxCC3I?autoplay=1&mute=1&loop=1&playlist=euR5YDxCC3I&controls=1&rel=0&modestbranding=1"
-        title="Auto-Healing Kubernetes Platform — Live Demo"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen>
-      </iframe>
+    <div class="video-wrap" id="videoWrap" onclick="playVideo()">
+      <div class="video-poster" id="videoPoster">
+        <div class="video-poster-grid"></div>
+        <div class="play-btn-group">
+          <div class="play-btn">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <div class="play-btn-label">Watch the Recovery</div>
+          <div class="play-btn-sub">Click to play · ~1 min</div>
+        </div>
+      </div>
     </div>
     <div class="video-caption">Live recording — Auto-Healing Kubernetes Platform &nbsp;·&nbsp; Node failure to full recovery in under 46 seconds</div>
   </div>
@@ -866,9 +1000,9 @@
         <div class="services-offered">
           <div class="service-pill">Platform Engineering</div>
           <div class="service-pill">Kubernetes Infrastructure</div>
+          <div class="service-pill">GitOps & Progressive Delivery</div>
           <div class="service-pill">Reliability Engineering</div>
           <div class="service-pill">Cloud Cost Optimization</div>
-          <div class="service-pill">DevSecOps</div>
         </div>
         <div class="availability">Available for remote contracts — US & Canada</div>
       </div>
@@ -938,6 +1072,19 @@
       panel.classList.add('open');
       btn.classList.add('open');
     }
+  }
+
+  function playVideo() {
+    const wrap = document.getElementById('videoWrap');
+    const poster = document.getElementById('videoPoster');
+    poster.classList.add('hidden');
+    const iframe = document.createElement('iframe');
+    iframe.src = 'https://www.youtube.com/embed/euR5YDxCC3I?autoplay=1&rel=0&modestbranding=1';
+    iframe.title = 'Auto-Healing Kubernetes Platform — Live Demo';
+    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+    iframe.allowFullscreen = true;
+    wrap.appendChild(iframe);
+    wrap.onclick = null;
   }
 </script>
 
